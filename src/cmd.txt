@@ -1,0 +1,25 @@
+downloading node modules (react)
+
+>localhost:3000  
+
+>npx create-react-app imdb_dash_board
+
+>code .   ///creating react app infrastructure
+
+>npm start
+
+>npm install axios
+
+>npm i react-bootstrap
+
+>npm i @fortawesome/react-fontawesome       //for fonts
+
+>npm i @fortawesome/free-solid-svg-icons    // icons
+
+>npm i react-player
+
+>npm i react-router-dom //components
+
+>npm install @mui/material @emotion/react @emotion/styled       //material ui (carousel)
+
+>
