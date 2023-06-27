@@ -19,3 +19,7 @@ body{
   color:white;
   margin-top:10px;
 }
+
+body{
+  overflow:hidden;
+}
