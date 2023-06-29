@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import static org.apache.tomcat.jni.SSLConf.apply;
-import static org.springframework.data.mongodb.core.query.UntypedExampleMatcher.matching;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class ReviewService {
@@ -17,7 +17,7 @@ public class ReviewService {
     @Autowired
     private MongoTemplate mongoTemplate; //creating mongo template  same as repository
     public Review createReview(String reviewBody,String imdbId){  //return review
-        Review review = reviewRepository.insert(new Review(reviewBody));  //insert review body in database
+        Review review = reviewRepository.insert(new Review(reviewBody,LocalDateTime.now(),LocalDateTime.now()));  //insert review body in database
 
 
         mongoTemplate.update(Movie.class) //dynamic query for update
