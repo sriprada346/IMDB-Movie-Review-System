@@ -51,6 +51,7 @@ const Reviews =({getMoviesData,movie,reviews,setReviews}) => {
                 </Col>
                 <Col>
                     {
+                       
                         <>
                             <Row>
                                 <Col>
@@ -63,13 +64,13 @@ const Reviews =({getMoviesData,movie,reviews,setReviews}) => {
                                 </Col>
 
                             </Row>
+                            </>
                         
-                        </>
-                    }
+                }
                     {
-                        reviews?.map((r) => {
-                            return(
-                                <>
+                        reviews?.map((r) => (
+                            
+                                <React.Fragment key={r._id}>
                                     <Row>
                                         <Col>{r.body}</Col>
                                     </Row>
@@ -78,9 +79,9 @@ const Reviews =({getMoviesData,movie,reviews,setReviews}) => {
                                             <hr />
                                         </Col>
                                     </Row>                                
-                                </>
+                                 </React.Fragment>
                             )
-                        })
+                        )
                     }     
                 </Col>
              </Row>
@@ -90,7 +91,7 @@ const Reviews =({getMoviesData,movie,reviews,setReviews}) => {
                 </Col>
              </Row>
         </Container>
-    );
+    )
 
 }
 

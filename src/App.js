@@ -13,8 +13,8 @@ import { Outlet,Link } from 'react-router-dom';
 
 function App() {
 
-  const [movies,setMovies]=useState([]); 
-  const [movie,setMovie] = useState(null);
+  const [movies,setMovies]=useState(); 
+  const [movie,setMovie] = useState();
   const [reviews,setReviews] = useState([]);
 
   const getMovies = async () =>{
@@ -32,25 +32,38 @@ function App() {
     }
   }
 
-  useEffect(() =>{
-    getMovies();
-  },[])
+ 
 
  
   const getMoviesData = async (movieId) => {
     try{
         const response = await api.get(`/api/vl/movies/${movieId}`);
         const singleMovie = response.data;
-        console.log('hetre comes single movie data',singleMovie);
+
+        
+        
+        //console.log('the length is',singleMovie.reviews.length);
+        
+        console.log('hetre comes single movie data',singleMovie.reviewIds[0].body);
+        console.log('hetre comes single movie data',singleMovie.reviewIds[1].body);
         setMovie(singleMovie);  
+        setReviews(singleMovie.reviews);
+        setReviews([]);
 
         //setReviews(singleMovie.reviews);
 
-        if (singleMovie.reviews) {
-          setReviews(singleMovie.reviews);
+       /* if (singleMovie.review && singleMovie.reviewsId.length > 0) {
+          console.log("here");
+          
+          
         } else {
+          console.log("passes array");
           setReviews([]); // Set an empty array if reviews are null or undefined
+          singleMovie.reviewIds.forEach((review) => {
+            console.log(review.body);
+          });
         }
+        */
 
     }
     catch(error)
@@ -60,7 +73,9 @@ function App() {
 
   }
 
-
+  useEffect(() =>{
+    getMovies();
+  },[])
 
 
 
@@ -69,10 +84,10 @@ function App() {
       <Header/>
   
         <Routes>
-         <Route path="/" element={<Layout/>}>
-              <Route index element={<Home movies={movies}/>}></Route>
-              <Route path="/Reviews/:movieId" element = {<Reviews getMoviesData={ getMoviesData } movie={ movie } reviews ={ reviews } setReviews = { setReviews } />}></Route>
-              <Route path="/Trailer/:ytTrailerId" element={<Trailer/>}></Route> 
+         <Route key="layout-route" path="/" element={<Layout/>}>
+              <Route key="home-route" index element={<Home movies={movies}/>}></Route>
+              <Route key="reviews-route" path="/Reviews/:movieId" element = {<Reviews getMoviesData={ getMoviesData } reviews ={ reviews } movie={ movie }  setReviews = { setReviews } />}></Route>
+              <Route key="trailer-route" path="/Trailer/:ytTrailerId" element={<Trailer/>}></Route> 
          </Route>
       </Routes>  
 
